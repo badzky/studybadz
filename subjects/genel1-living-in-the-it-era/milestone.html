@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>GENEL1 - History of Computer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f9fafb;
+      color: #1f2937;
+      margin: 0;
+      padding: 0;
+      line-height: 1.7;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+    header {
+      background-color: #1d4ed8;
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .container {
+      padding: 2rem;
+    }
+    h1 {
+      font-size: 2.5rem;
+      color: #1d4ed8;
+      margin-bottom: 1rem;
+    }
+    h2 {
+      color: #2563eb;
+      border-bottom: 2px solid #93c5fd;
+      padding-bottom: 0.3rem;
+      margin-top: 2rem;
+    }
+    h3 {
+      color: #1e40af;
+      margin-top: 1.5rem;
+    }
+    ul {
+      margin-left: 1.5rem;
+      padding-left: 1rem;
+    }
+    li::marker {
+      color: #2563eb;
+    }
+    strong, .highlight {
+      font-weight: bold;
+      color: #2563eb;
+    }
+    p {
+      margin-bottom: 1rem;
+    }
+  </style>
+  <script>
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.addEventListener('copy', e => e.preventDefault());
+    document.addEventListener('cut', e => e.preventDefault());
+    document.addEventListener('keydown', e => {
+      if (
+        e.key === 'PrintScreen' ||
+        (e.ctrlKey && ['p', 'c', 'x', 'u'].includes(e.key.toLowerCase())) ||
+        (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i') ||
+        (e.metaKey && e.shiftKey && e.key.toLowerCase() === 'i')
+      ) {
+        e.preventDefault();
+        alert("This action is disabled.");
+      }
+    });
+  </script>
+</head>
+<body>
+  <header>
+    <div>📘 GENEL1 - living in the IT era</div>
+    <a href="../../index.html">⬅ Back to Dashboard</a>
+  </header>
+
+  <div class="container">
+    <h1>MODULE 2<br>HISTORY OF COMPUTER</h1>
+
+    <h2>Overview</h2>
+    <p>The history of computing began long before the invention of modern computers. Early devices such as the <span class="highlight">abacus</span> and <span class="highlight">tally sticks</span> helped humans perform calculations thousands of years ago. Over time, inventions evolved from mechanical tools to digital computers that transformed the world.</p>
+
+    <h2>Key Milestones in Computing History</h2>
+    <ul>
+      
+      <span class="highlight">Tally Sticks</span><br>Used in ancient times to keep records of numbers and transactions by carving notches into sticks—this practice dates back to 30,000 B.C.</li>
+      <br><span class="highlight">Abacus</span><br>A frame with beads used to perform arithmetic. It is considered the first true computing device that allowed people to perform addition, subtraction, and more efficiently.</li>
+      <br><span class="highlight">Napier’s Bones</span><br>A set of rods inscribed with numbers to simplify and speed up multiplication and division operations using logarithmic principles.</li>
+      <br><span class="highlight">Slide Rule</span><br>Operated similarly to a ruler but based on logarithmic scales; widely used by engineers and scientists for complex calculations before the advent of calculators.</li>
+      <br><span class="highlight">Pascaline</span><br>A mechanical calculator built by Blaise Pascal to help his father with tax collection; it could perform basic addition and subtraction using a set of gears and wheels.</li>
+      <br><span class="highlight">Stepped Reckoner</span><br>Invented by Leibniz, it extended Pascal’s design and allowed for multiplication and division by advancing a stepped drum mechanism.</li>
+      <br><span class="highlight">Jacquard Loom</span><br>This weaving loom used punch cards to automatically weave complex patterns—considered a precursor to programming due to its use of coded instructions.</li>
+      <br><span class="highlight">Arithmometer</span><br>The first commercially successful mechanical calculator. It could perform addition, subtraction, multiplication, and division reliably, and was mass-produced.</li>
+      <br><span class="highlight">Difference & Analytical Engines</span><br>Designed by Charles Babbage, these were early mechanical general-purpose computers. The Analytical Engine included concepts like memory and conditional branching.</li>
+      <br><span class="highlight">Ada Lovelace</span><br>Recognized as the world’s first computer programmer; she wrote the first algorithm intended for implementation on Babbage’s Analytical Engine.</li>
+      <br><span class="highlight">Harvard Mark I</span><br>A massive electro-mechanical computer built by IBM and Harvard; it was used for ballistic calculations during WWII and operated using punched tape.</li>
+      <br><span class="highlight">ENIAC</span><br>Short for Electronic Numerical Integrator and Computer, ENIAC was the first programmable, all-electronic, general-purpose digital computer.</li>
+      <br><span class="highlight">UNIVAC 1</span><br>The first computer built for business and administrative use. It was the first commercially available computer in the U.S.</li>
+      <br><span class="highlight">EDVAC</span><br>Introduced the concept of the stored-program computer. Instructions and data were stored in memory, forming the basis for modern computer architecture.</li>
+      <br><span class="highlight">Osborne 1</span><br>The first portable computer released in 1981 by the Osborne Computer Corporation. It featured a tiny screen and keyboard built into a compact case, allowing users to transport computing power.</li>
+    <br><span class="highlight">Electronic Controls Company (ECC)</span><br>Founded in 1949 by John Presper Eckert and John Mauchly, ECC was the first computer company, setting the foundation for the commercial computer industry.</li>
+    </ul>
+
+    <h2>Computing Eras (Periods)</h2>
+    <ul>
+      <strong>Premechanical Age:</strong> 3000 B.C. – 1450 A.D.<br> — early recording devices like tally sticks and abacuses were used. Writing systems and numeric records appeared on clay tablets and papyrus.</li>
+      <br><strong>Mechanical Age:</strong> 1450 – 1840 <br>— invention of mechanical calculating devices such as the Pascaline and Stepped Reckoner. The printing press also emerged, accelerating information sharing.</li>
+      <br><strong>Electromechanical Age:</strong> 1840 – 1940 <br>— technologies like the telegraph, telephone, and electromechanical computers like Harvard Mark I were developed. Punch cards became popular for input and control.</li>
+      <br><strong>Electronic Age:</strong> 1940 – Present<br> — development of fully electronic computers using vacuum tubes, transistors, and microprocessors. Modern computing, the internet, and artificial intelligence belong to this period.</li>
+    </ul>
+
+    <h2>Generations of Computers</h2>
+    <ul>
+      <strong>First Generation:</strong> 1946 – 1958<br> -Used vacuum tubes, large and inefficient, produced lots of heat, programming done in machine language.
+      <br><strong>Second Generation:</strong> 1959 – 1964<br> -Used transistors, more reliable, smaller in size, used assembly language and high-level programming languages.
+      <br><strong>Third Generation:</strong> 1965 – 1970 <br>-Used integrated circuits, allowed more compact, powerful machines, introduced keyboards and monitors.
+     <br><strong>Fourth Generation:</strong> 1971 – Present <br>-Uses microprocessors, personal computers became common, introduction of GUI and networking.
+      <br><strong>Fifth Generation:</strong> Present – Future<br> -Focused on Artificial Intelligence, natural language processing, robotics, and advanced computing models.
+    </ul>
+  </div>
+</body>
+</html>
