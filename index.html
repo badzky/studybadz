@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en" class="">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>StudyBud Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#2563EB',
+            light: '#F3F4F6',
+            darkText: '#1F2937',
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-light dark:bg-gray-900 min-h-screen pt-24 pb-16 font-sans text-darkText dark:text-gray-100 transition-colors">
+
+  <div class="max-w-7xl mx-auto">
+    <!-- Header -->
+   <div id="header-container"></div>
+
+    <!-- Controls -->
+    <div class="flex flex-wrap justify-between items-center gap-4 mb-6">
+      <input type="text" id="searchInput" placeholder="Search lessons..." class="border border-gray-300 dark:border-gray-700 px-4 py-2 rounded-lg shadow-sm w-full max-w-sm focus:outline-none focus:ring-2 focus:ring-primary bg-white dark:bg-gray-800 dark:text-white" />
+      <button onclick="toggleDarkMode()" class="px-4 py-2 bg-primary text-white rounded-lg shadow hover:bg-blue-700 transition">
+        Toggle Dark Mode
+      </button>
+    </div>
+
+    <!-- Subject Cards Grid -->
+    <div id="subject-container" class="grid gap-6 sm:grid-cols-2 md:grid-cols-3"></div>
+  </div>
+
+  <!-- Special Code Form Modal -->
+  <div id="formModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+    <div class="bg-white dark:bg-gray-800 rounded-lg p-6 w-full max-w-sm">
+      <h2 class="text-lg font-bold text-darkText dark:text-white mb-4">Enter Special Code</h2>
+      <form id="accessForm" class="space-y-4">
+        <input type="text" id="specialCode" placeholder="Special Code" required class="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-md bg-white dark:bg-gray-700 text-darkText dark:text-white">
+        <div class="flex justify-end gap-2">
+          <button type="button" onclick="closeForm()" class="px-4 py-2 bg-gray-300 dark:bg-gray-600 text-darkText dark:text-white rounded hover:bg-gray-400">Cancel</button>
+          <button type="submit" class="px-4 py-2 bg-primary text-white rounded hover:bg-blue-700">Continue</button>
+        </div>
+      </form>
+    </div>
+  </div>
+<!-- Keep the head and body as-is until the <script> section -->
+<div id="footer-container"></div>
+<script>
+
+
+
+
+
+
+
+  const subjects = {
+    "genel1-living-in-the-it-era": [
+      "introduction.html",
+      "history.html",
+      "milestone.html",
+      "exam/index1.html",//PRELIM EXAM
+      "1.html",
+      "2.html",
+      "3.html",
+      "exam/index2.html", //MIDTERM EXAM
+      "4.html",
+      "5.html",
+      "6.html",
+      "exam/index3.html"//FINAL EXAM
+    ],
+    //NEXT SUBJECT ITO
+            "genel2-introduction-to-programming": [
+            "basics.html",
+            "data-types.html",
+            "control-structures.html"
+            ]
+        };
+
+  const subjectDisplayNames = {
+    "genel1-living-in-the-it-era": "GENEL1 - Living in the IT Era",
+
+    //NEXT SUBJECT ITO
+          "genel2-introduction-to-programming": "GENEL2 - Introduction to Programming"
+  };
+
+  const lessonCodes = {
+    "genel1-living-in-the-it-era/introduction.html": "GENEL1A-PRELIM",
+    "genel1-living-in-the-it-era/history.html": "GENEL1B-PRELIM",
+    "genel1-living-in-the-it-era/milestone.html": "GENEL1C-PRELIM",
+    "genel1-living-in-the-it-era/exam/index1.html": "EXAM",                             //PRELIM EXAM
+    "genel1-living-in-the-it-era/1.html": "GENEL1A-MIDTERM",
+    "genel1-living-in-the-it-era/2.html": "GENEL1B-MIDTERM",
+    "genel1-living-in-the-it-era/3.html": "GENEL1C-MIDTERM",
+      "genel1-living-in-the-it-era/exam/index2.html": "EXAM",                             //MIDTERM EXAM
+    "genel1-living-in-the-it-era/4.html": "GENEL1A-FINALS",
+    "genel1-living-in-the-it-era/5.html": "GENEL1B-FINALS",
+    "genel1-living-in-the-it-era/6.html": "GENEL1C-FINALS",
+     "genel1-living-in-the-it-era/exam/index3.html": "EXAM",                             //MIDTERM EXAM
+
+
+
+
+    //NEXT SUBJECT ITO
+            "genel2-introduction-to-programming/basics.html": "GENEL2A",
+            "genel2-introduction-to-programming/data-types.html": "GENEL2B",
+            "genel2-introduction-to-programming/control-structures.html": "GENEL2C"
+  };
+
+  const lessonDisplayNames = {
+    "genel1-living-in-the-it-era/introduction.html": "PRELIM-1",
+    "genel1-living-in-the-it-era/history.html": "PRELIM-2",
+    "genel1-living-in-the-it-era/milestone.html": "PRELIM 3",
+"genel1-living-in-the-it-era/exam/index1.html": "PRELIMINARY EXAMINATION",// PRELIM EXAM
+"genel1-living-in-the-it-era/1.html": "MIDTERM-1",
+    "genel1-living-in-the-it-era/2.html": "MIDTERM-2",
+    "genel1-living-in-the-it-era/3.html": "MIDTERM 3",
+"genel1-living-in-the-it-era/exam/index2.html": "MIDTERM EXAMINATION",// MIDTERM EXAM
+"genel1-living-in-the-it-era/4.html": "FINALS-1",
+    "genel1-living-in-the-it-era/5.html": "FINALS-2",
+    "genel1-living-in-the-it-era/6.html": "FINALS 3",
+"genel1-living-in-the-it-era/exam/index3.html": "MIDTERM EXAMINATION",// FINAL EXAM
+
+    //NEXT SUBJECT ITO
+            "genel2-introduction-to-programming/basics.html": "Programming Basics",
+            "genel2-introduction-to-programming/data-types.html": "Understanding Data Types",
+            "genel2-introduction-to-programming/control-structures.html": "Control Structures in Programming"
+  };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  const container = document.getElementById("subject-container");
+  let pendingLessonURL = null;
+  let pendingLessonKey = null;
+
+  function getStorageKey(subject, lesson) {
+    return `${subject}-${lesson}`;
+  }
+
+  function getCompletion(subject, lessons) {
+    const taught = lessons.filter(lesson => localStorage.getItem(getStorageKey(subject, lesson)) === "taught");
+    return Math.round((taught.length / lessons.length) * 100);
+  }
+
+  function renderApp() {
+    container.innerHTML = "";
+
+    Object.entries(subjects).forEach(([subject, lessons]) => {
+      const completion = getCompletion(subject, lessons);
+      const displayName = subjectDisplayNames[subject] || subject;
+
+      const card = document.createElement("div");
+      card.className = "relative bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-xl transition duration-300 p-6 flex flex-col cursor-pointer group";
+
+      card.innerHTML = `
+        <div onclick="toggleLessons('${subject}')" class="select-none">
+          <h2 class="text-xl font-bold text-darkText dark:text-white mb-1">${displayName}</h2>
+          <p class="text-sm text-gray-500 dark:text-gray-400">${lessons.length} lessons | ${completion}% complete</p>
+          <div class="mt-2 w-full h-3 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+            <div class="h-3 bg-green-500 transition-all" style="width: ${completion}%;"></div>
+          </div>
+        </div>
+        <ul id="lessons-${subject}" class="hidden mt-4 space-y-2 text-sm"></ul>
+      `;
+
+      container.appendChild(card);
+
+      const lessonList = card.querySelector(`#lessons-${subject}`);
+      lessons.forEach(lesson => {
+        const key = getStorageKey(subject, lesson);
+        const isTaught = localStorage.getItem(key) === "taught";
+        const lessonKey = `${subject}/${lesson}`;
+        const lessonName = lessonDisplayNames[lessonKey] || lesson;
+
+        const item = document.createElement("li");
+        item.className = "flex justify-between items-center border border-gray-200 dark:border-gray-700 rounded-lg px-3 py-2 hover:bg-gray-50 dark:hover:bg-gray-700";
+
+        item.innerHTML = `
+          <span class="text-primary dark:text-blue-400 hover:underline cursor-pointer" onclick="handleLessonClick('subjects/${lessonKey}', '${lessonKey}')">
+            ${lessonName}
+          </span>
+          <button
+            class="px-2 py-1 text-xs font-semibold rounded ${isTaught ? 'bg-green-600' : 'bg-primary'} text-white hover:opacity-90 transition"
+            onclick="event.stopPropagation(); toggleLesson('${subject}', '${lesson}')"
+          >
+            ${isTaught ? "Taught" : "Mark"}
+          </button>
+        `;
+
+        lessonList.appendChild(item);
+      });
+    });
+  }
+
+  function toggleLessons(subject) {
+    const ul = document.getElementById(`lessons-${subject}`);
+    ul.classList.toggle('hidden');
+  }
+
+  function toggleLesson(subject, lesson) {
+    const key = getStorageKey(subject, lesson);
+    const isTaught = localStorage.getItem(key) === "taught";
+    if (isTaught) {
+      localStorage.removeItem(key);
+    } else {
+      localStorage.setItem(key, "taught");
+    }
+    renderApp();
+  }
+
+  function toggleDarkMode() {
+    document.documentElement.classList.toggle('dark');
+    localStorage.setItem('darkMode', document.documentElement.classList.contains('dark'));
+  }
+
+  if (localStorage.getItem('darkMode') === 'true') {
+    document.documentElement.classList.add('dark');
+  }
+
+  document.getElementById('searchInput').addEventListener('input', function () {
+    const query = this.value.toLowerCase();
+    document.querySelectorAll('#subject-container ul li').forEach(item => {
+      const text = item.textContent.toLowerCase();
+      item.style.display = text.includes(query) ? '' : 'none';
+    });
+  });
+
+  function handleLessonClick(url, lessonKey) {
+    const savedCode = localStorage.getItem(`access-${lessonKey}`);
+    const requiredCode = lessonCodes[lessonKey];
+
+    if (savedCode === requiredCode) {
+      window.location.href = url;
+    } else {
+      pendingLessonURL = url;
+      pendingLessonKey = lessonKey;
+      openForm();
+    }
+  }
+
+  function openForm() {
+    document.getElementById("formModal").classList.remove("hidden");
+  }
+
+  function closeForm() {
+    document.getElementById("formModal").classList.add("hidden");
+  }
+
+  document.getElementById("accessForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+    const code = document.getElementById("specialCode").value.trim().toUpperCase();
+    const correctCode = lessonCodes[pendingLessonKey];
+
+    if (code === correctCode) {
+      localStorage.setItem(`access-${pendingLessonKey}`, code);
+      closeForm();
+      window.location.href = pendingLessonURL;
+    } else {
+      alert("Incorrect special code. Please try again.");
+    }
+  });
+
+  renderApp();
+
+
+
+
+// Load header and footer from external files
+  function loadPartial(id, file) {
+    fetch(file)
+      .then(response => response.text())
+      .then(html => {
+        document.getElementById(id).innerHTML = html;
+      });
+  }
+
+  loadPartial("header-container", "header.html");
+  loadPartial("footer-container", "footer.html");
+
+
+
+</script>
+
+</body>
+</html>
